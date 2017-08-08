@@ -10,26 +10,31 @@ public class RoomCapacitorUtils {
      */
     public static void computeRequiredCapacity(int numRooms, int seniorCapacity, int juniorCapacity) {
 
-        int seniors = 1;//minimum 1 senior
+        int seniors = 1;//number of seniors required. Minimum 1
         int juniors = 0;
         int residue = numRooms - seniorCapacity; //therefore number of rooms already less for 1 senior
         //while we didn't clean all the rooms continue counting number of seniors required
         while (residue > 0) {
-            if (getCurrentOvercapacity(residue, seniorCapacity) > getCurrentOvercapacity(residue, juniorCapacity)) {
+            if (getCurrentResideToClean(residue, seniorCapacity) > getCurrentResideToClean(residue, juniorCapacity)) {
 
-                if ((getJuniorResidueOvercapacity(residue, juniorCapacity) <= getJuniorResidueOvercapacity(residue, seniorCapacity)) && numRooms != (residue + seniorCapacity)) {
+                //if number of rooms nearly reached the total capacity,
+                //and overcapacity to clean with seniors exceed overcapacity with juniors
+                if ((getResidueOvercapacity(residue, juniorCapacity) <= getResidueOvercapacity(residue, seniorCapacity)) && numRooms != (residue + seniorCapacity)) {
                     residue = residue + seniorCapacity;
                     seniors--;
-                } else if (numRooms == (residue + seniorCapacity)) {
+                }
+                //if we reached the number of remaining rooms to clean with at least one senior
+                else if (numRooms == (residue + seniorCapacity)) {
                     residue = residue - seniorCapacity;
                     seniors++;
                     break;
                 }
                 break;
             }
-            residue = residue - seniorCapacity;
+            residue = residue - seniorCapacity;  //clean senior capacity rooms
             seniors++;
         }
+        //clean the remaining rooms with juniors
         while (residue > 0) {
             residue = residue - juniorCapacity;
             juniors++;
@@ -37,20 +42,22 @@ public class RoomCapacitorUtils {
         System.out.println("Seniors: " + seniors + "\nJuniors: " + juniors);
     }
 
-    private static int getCurrentOvercapacity(int numOfRooms, int workerCapacity) {
+    /**
+     * Get absolute value of the number of the rooms to clean
+     */
+    private static int getCurrentResideToClean(int numOfRooms, int workerCapacity) {
         return Math.abs(numOfRooms - workerCapacity);
     }
 
-    private static int getJuniorResidueOvercapacity(int numOfRooms, int workCapacity) {
+    /**
+     * get overcapacity for remaining number of rooms per given workforce capacity
+     */
+    private static int getResidueOvercapacity(int numOfRooms, int workCapacity) {
         int overcapacity = 0;
         while (numOfRooms > 0) {
             numOfRooms = numOfRooms - workCapacity;
             overcapacity = numOfRooms;
         }
         return overcapacity;
-    }
-
-    private static int overcapacity() {
-        return 0;
     }
 }

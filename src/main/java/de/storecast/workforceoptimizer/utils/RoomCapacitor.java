@@ -1,14 +1,15 @@
-public class RoomCapacitorUtils {
+package de.storecast.workforceoptimizer.utils;
+
+public class RoomCapacitor {
 
 
     /**
      * Computes required number of seniors and junior for given number of rooms
-     *
-     * @param numRooms       number of rooms to be cleaned
-     * @param seniorCapacity number of rooms a senior can clean
-     * @param juniorCapacity number of rooms a junior can clean
      */
-    public static void computeRequiredCapacity(int numRooms, int seniorCapacity, int juniorCapacity) {
+    public static TransferObject computeRequiredCapacity(TransferObject to) {
+        int numRooms = to.getRooms();
+        int seniorCapacity = to.getSeniorCapacity();
+        int juniorCapacity = to.getJuniorCapacity();
 
         int seniors = 1;//number of seniors required. Minimum 1
         int juniors = 0;
@@ -39,7 +40,10 @@ public class RoomCapacitorUtils {
             residue = residue - juniorCapacity;
             juniors++;
         }
-        System.out.println("Seniors: " + seniors + "\nJuniors: " + juniors);
+        System.out.println("Seniors: " + seniors + ", Juniors: " + juniors);
+        to.setJuniors(juniors);
+        to.setSeniors(seniors);
+        return to;
     }
 
     /**

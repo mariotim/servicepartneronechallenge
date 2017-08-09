@@ -1,12 +1,14 @@
 package de.storecast.workforceoptimizer.utils;
 
-public class RoomCapacitor {
+import de.storecast.workforceoptimizer.utils.to.RequestObject;
+import de.storecast.workforceoptimizer.utils.to.ResponseObject;
 
+public class RoomCapacitor {
 
     /**
      * Computes required number of seniors and junior for given number of rooms
      */
-    public static TransferObject computeRequiredCapacity(TransferObject to) {
+    public static ResponseObject computeRequiredCapacity(RequestObject to) {
         int numRooms = to.getRooms();
         int seniorCapacity = to.getSeniorCapacity();
         int juniorCapacity = to.getJuniorCapacity();
@@ -41,9 +43,7 @@ public class RoomCapacitor {
             juniors++;
         }
         System.out.println("Seniors: " + seniors + ", Juniors: " + juniors);
-        to.setJuniors(juniors);
-        to.setSeniors(seniors);
-        return to;
+        return new ResponseObject(seniors, juniors);
     }
 
     /**

@@ -63,3 +63,8 @@ API to get optimal workforce
 ]
 ```
 
+CURL example:
+
+```curl
+curl  -H "Content-Type: application/json" http://localhost:8080/workforce -X POST -d '{"rooms":[35, 21, 17], "seniorCapacity":10, "juniorCapacity":6}'
+```

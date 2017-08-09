@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class WorkforceOptimizationController {
 
     @RequestMapping(method = RequestMethod.POST)
-    ResponseEntity<ResponseObject> computeWorkforce(@RequestBody RequestObject input) {
-        return new ResponseEntity<ResponseObject>(RoomCapacitor.computeRequiredCapacity(input), HttpStatus.OK);
+    ResponseEntity<ResponseObject[]> computeWorkforce(@RequestBody RequestObject input) {
+        return new ResponseEntity<>(RoomCapacitor.getOptimalWorkforce(input), HttpStatus.OK);
     }
 }

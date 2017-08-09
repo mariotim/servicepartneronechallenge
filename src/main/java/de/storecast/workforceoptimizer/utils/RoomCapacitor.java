@@ -5,13 +5,18 @@ import de.storecast.workforceoptimizer.utils.to.ResponseObject;
 
 public class RoomCapacitor {
 
+    public static ResponseObject[] getOptimalWorkforce(RequestObject to) {
+        ResponseObject[] responseArray = new ResponseObject[to.getRooms().length];
+        for (int i = 0; i < to.getRooms().length; i++) {
+            responseArray[i] = computeRequiredCapacity(to.getRooms()[i], to.getSeniorCapacity(), to.getJuniorCapacity());
+        }
+        return responseArray;
+    }
+
     /**
      * Computes required number of seniors and junior for given number of rooms
      */
-    public static ResponseObject computeRequiredCapacity(RequestObject to) {
-        int numRooms = to.getRooms();
-        int seniorCapacity = to.getSeniorCapacity();
-        int juniorCapacity = to.getJuniorCapacity();
+    public static ResponseObject computeRequiredCapacity(int numRooms, int seniorCapacity, int juniorCapacity) {
 
         int seniors = 1;//number of seniors required. Minimum 1
         int juniors = 0;

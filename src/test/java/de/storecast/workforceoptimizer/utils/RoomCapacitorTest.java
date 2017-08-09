@@ -20,8 +20,8 @@ public class RoomCapacitorTest {
         Assert.assertTrue(to.getJuniors() == 1);
 
         to = RoomCapacitor.computeRequiredCapacity(21, 10, 6);
-        Assert.assertTrue(to.getSeniors() == 2);
-        Assert.assertTrue(to.getJuniors() == 1);
+        Assert.assertTrue(to.getSeniors() == 1);
+        Assert.assertTrue(to.getJuniors() == 2);
 
         to = RoomCapacitor.computeRequiredCapacity(17, 10, 6);
         Assert.assertTrue(to.getSeniors() == 2);
@@ -32,6 +32,18 @@ public class RoomCapacitorTest {
         Assert.assertTrue(to.getJuniors() == 1);
 
         to = RoomCapacitor.computeRequiredCapacity(28, 11, 6);
+        Assert.assertTrue(to.getSeniors() == 2);
+        Assert.assertTrue(to.getJuniors() == 1);
+
+        to = RoomCapacitor.computeRequiredCapacity(39, 11, 8);
+        Assert.assertTrue(to.getSeniors() == 3);
+        Assert.assertTrue(to.getJuniors() == 1);
+
+        to = RoomCapacitor.computeRequiredCapacity(10, 5, 3);
+        Assert.assertTrue(to.getSeniors() == 2);
+        Assert.assertTrue(to.getJuniors() == 0);
+
+        to = RoomCapacitor.computeRequiredCapacity(12, 5, 3);
         Assert.assertTrue(to.getSeniors() == 2);
         Assert.assertTrue(to.getJuniors() == 1);
     }

@@ -6,7 +6,8 @@ Home assignment for ServicePartnerOne
 
 The assignment is done on Java 8 and spring boot. 
 No additional external libraries were used. The project doesn't have input validation, 
-assuming that input json has correct format. 
+assuming that input json has correct format. 100 structures and 100 rooms neglected, since 
+it has no affect on performance.  
 
 
 **Running the unit test**

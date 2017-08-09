@@ -23,20 +23,19 @@ public class RoomCapacitor {
         int residue = numRooms - seniorCapacity; //therefore number of rooms already less for 1 senior
         //while we didn't clean all the rooms continue counting number of seniors required
         while (residue > 0) {
-            if (getCurrentResideToClean(residue, seniorCapacity) > getCurrentResideToClean(residue, juniorCapacity)) {
+            if (getCurrentResidueToClean(residue, seniorCapacity) > getCurrentResidueToClean(residue, juniorCapacity)) {
 
-                //if number of rooms nearly reached the total capacity,
-                //and overcapacity to clean with seniors exceed overcapacity with juniors
-                if ((getResidueOvercapacity(residue, juniorCapacity) <= getResidueOvercapacity(residue, seniorCapacity)) && numRooms != (residue + seniorCapacity)) {
-                    residue = residue + seniorCapacity;
-                    seniors--;
-                }
                 //if we reached the number of remaining rooms to clean with at least one senior
-                else if (numRooms == (residue + seniorCapacity)) {
+                if (numRooms == (residue + seniorCapacity)) {
                     residue = residue - seniorCapacity;
                     seniors++;
                     break;
+                } else if ((getResidueOvercapacity(residue + seniorCapacity, juniorCapacity) >= getResidueOvercapacity(residue, juniorCapacity))
+                        || (getResidueOvercapacity(residue, juniorCapacity) <= getResidueOvercapacity(residue, seniorCapacity))) {
+                    residue = residue + seniorCapacity;
+                    seniors--;
                 }
+
                 break;
             }
             residue = residue - seniorCapacity;  //clean senior capacity rooms
@@ -54,7 +53,7 @@ public class RoomCapacitor {
     /**
      * Get absolute value of the number of the rooms to clean
      */
-    private static int getCurrentResideToClean(int numOfRooms, int workerCapacity) {
+    private static int getCurrentResidueToClean(int numOfRooms, int workerCapacity) {
         return Math.abs(numOfRooms - workerCapacity);
     }
 
